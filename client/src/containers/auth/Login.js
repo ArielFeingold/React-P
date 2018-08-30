@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
+import '../../App.css';
 import { Container, Row, Col, Input, Button, Fa, Card, CardBody } from 'mdbreact';
 import Spinner from '../../components/UI/Spinner'
 
@@ -68,7 +69,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: ( email, password ) => dispatch( actions.auth( email, password) ),
+        onLogin: ( email, password ) => dispatch( actions.login( email, password) ),
         onSetAuthRedirectPath: () => dispatch( actions.setAuthRedirectPath( '/' ) )
     };
 };

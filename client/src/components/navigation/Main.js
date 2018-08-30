@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Login from '../../containers/Auth/Login'
-import Signup from '../../containers/Auth/Signup'
+import Login from '../../containers/auth/Login'
+import Signup from '../../containers/auth/Signup'
 
 const Main = () => (
   <main>
