@@ -1,22 +1,23 @@
 import React from 'react'
-import {NavbarNav, NavItem, NavLink } from 'mdbreact';
+import {NavbarNav, NavItem } from 'mdbreact';
+import { Link } from 'react-router-dom'
 
 const AuthTabs = () => (
   <React.Fragment>
     <NavbarNav left>
       <NavItem active>
-          <NavLink to="#" >Home</NavLink>
+          <Link className="nav-link" to="#" >Home</Link>
       </NavItem>
       <NavItem>
-          <NavLink to="#" disabled>Exercises</NavLink>
+          <Link className="nav-link" to="#" disabled>Exercises</Link>
       </NavItem>
       <NavItem>
-          <NavLink to="#">Workouts</NavLink>
+          <Link className="nav-link" to="#">Workouts</Link>
       </NavItem>
     </NavbarNav>
     <NavbarNav right>
       <NavItem>
-        <NavLink to="#">Logout</NavLink>
+        <Link className="nav-link" to="/logout">Logout</Link>
       </NavItem>
     </NavbarNav>
   </React.Fragment>

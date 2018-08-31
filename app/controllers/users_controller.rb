@@ -1,3 +1,5 @@
+require 'pry-remote'
+
 class UsersController < ApplicationController
 
   def create
@@ -9,6 +11,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+
+  end
+
+  def show
+    user = current_user
+    binding.remote_pry
+    if user
+      render json: {status: 200, user: user}
+    else
+      render json: {status: 400, msg: "user not found"}
+    end
+  end
 
 
 private

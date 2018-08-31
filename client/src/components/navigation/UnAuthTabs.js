@@ -2,7 +2,7 @@ import React from 'react'
 import {NavbarNav, NavItem } from 'mdbreact';
 import { Link } from 'react-router-dom'
 
-const AuthTabs = () => (
+const UnAuthTabs = () => (
   <React.Fragment>
     <NavbarNav right>
       <NavItem >
@@ -15,4 +15,4 @@ const AuthTabs = () => (
   </React.Fragment>
 )
 
-export default AuthTabs;
+export default UnAuthTabs;

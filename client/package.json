@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-plugin-emotion": "^9.2.8",
     "emotion": "^9.2.8",
+    "jwt-decode": "^2.2.0",
     "mdbreact": "^4.7.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

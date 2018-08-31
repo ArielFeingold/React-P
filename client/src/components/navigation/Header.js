@@ -21,8 +21,8 @@ class Header extends Component {
     render() {
         return (
             <Navbar color="indigo" dark expand="md" scrolling>
-                <NavbarBrand href="/">
-                    <strong>Navbar</strong>
+                <NavbarBrand style={{color: "white"}}>
+                    <strong>GymJam</strong>
                 </NavbarBrand>
                 { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                 <Collapse isOpen = { this.state.collapse } navbar>

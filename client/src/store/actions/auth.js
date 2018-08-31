@@ -13,6 +13,13 @@ export const loginSuccess = (token) => {
     };
 };
 
+export const getUserSuccess = (id) => {
+  return {
+    type: actionTypes.GET_USER_SUCCESS,
+    userId: id
+  }
+}
+
 export const loginFail = (error) => {
     return {
         type: actionTypes.LOGIN_FAIL,
@@ -40,6 +47,41 @@ export const signupFail = (error) => {
     };
 };
 
+export const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+
+    return {
+        type: actionTypes.LOGOUT
+    };
+};
+
+export const getUser = (token) => {
+  return dispatch => {
+    let url = 'http://localhost:3001/users';
+    fetch(url, {
+        method: "GET",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "Authorization": "Bearer" + token
+        }
+    })
+    .then( response => {
+      if (!response.ok) { throw response }
+      return response.json()
+    })
+    .then( json => {
+      localStorage.setItem('userId', json.user.id);
+      dispatch(getUserSuccess(json.user.id))
+    })
+    .catch( err => {
+      console.log(err)
+    })
+  }
+}
+
 export const signup = (email, password, username) => {
 
     return dispatch => {
@@ -66,7 +108,6 @@ export const signup = (email, password, username) => {
             return response.json()
           })
           .then( json => {
-            console.log(json)
             dispatch(signupSuccess(json.user.id))
           })
           .then(dispatch(login(email, password)))
@@ -76,35 +117,37 @@ export const signup = (email, password, username) => {
       };
   }
 
-  export const login = (email, password) => {
+export const login = (email, password) => {
 
-      return dispatch => {
-        dispatch(loginStart());
-        const authData = {
-            auth: {
-              email: email,
-              password: password
-            }
-        };
-        let url = 'http://localhost:3001/user_token';
-        fetch(url, {
-                method: "POST",
-                mode: "cors",
-                credentials: "same-origin",
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
-                body: JSON.stringify(authData),
-            })
-            .then( response => {
-              if (!response.ok) { throw response }
-              return response.json()
-            })
-            .then( json => {
-              dispatch(loginSuccess(json.jwt))
-            })
-            .catch( err => {
-              dispatch(signupFail(err))
-            })
-        };
-    }
+    return dispatch => {
+      dispatch(loginStart());
+      const authData = {
+          auth: {
+            email: email,
+            password: password
+          }
+      };
+      let url = 'http://localhost:3001/user_token';
+      fetch(url, {
+              method: "POST",
+              mode: "cors",
+              credentials: "same-origin",
+              headers: {
+                  "Content-Type": "application/json; charset=utf-8",
+              },
+              body: JSON.stringify(authData),
+          })
+          .then( response => {
+            if (!response.ok) { throw response }
+            return response.json()
+          })
+          .then( json => {
+            localStorage.setItem('token', json.jwt);
+            dispatch(loginSuccess(json.jwt),
+            dispatch(getUser(json.jwt)))
+          })
+          .catch( err => {
+            dispatch(loginFail(err))
+          })
+      };
+  }
