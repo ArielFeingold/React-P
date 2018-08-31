@@ -14,6 +14,7 @@ class Login extends Component {
         password: '',
       }
 
+
       handleChange = event => {
         this.setState({
           [event.target.name]: event.target.value
@@ -46,8 +47,22 @@ class Login extends Component {
               form = <Spinner />
           }
 
+          let errorMessage = null;
+
+          if ( this.props.error ) {
+              errorMessage = (
+                  <p>{this.props.error.message}</p>
+              );
+          }
+
+          let authRedirect = null;
+          if ( this.props.isAuthenticated ) {
+              authRedirect = <Redirect to="/home" />
+          }
+
       return(
         <Container className="mt-5 mx-auto">
+          {authRedirect}
         <Row >
           <Col md="3" />
           <Col md="6">
@@ -64,6 +79,7 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
+        authRedirectPath: state.auth.authRedirectPath,
         authRedirectPath: state.auth.authRedirectPath
     };
 };

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
-import { Container, Row, Col, Input, Button } from 'mdbreact';
+import { Container, Row, Col, Input, Button, Badge } from 'mdbreact';
 import Spinner from '../../components/UI/Spinner'
 
 class Signup extends Component {
@@ -14,7 +15,6 @@ class Signup extends Component {
       }
 
       handleChange = event => {
-        console.log(this.state)
         this.setState({
           [event.target.name]: event.target.value
         })
@@ -45,9 +45,20 @@ class Signup extends Component {
 
         if ( this.props.loading ) {form = <Spinner />}
 
+        let errorMessage = null;
+
+        let authRedirect = null;
+        if ( this.props.isNewUser ) {
+            authRedirect = <Redirect to="/login" />
+        }
+        if ( this.props.isAuthenticated) {
+          authRedirect = <Redirect to="/home" />
+        }
+
       return(
         <Container className="mt-5 mx-auto">
           <Row>
+            {authRedirect}
             <Col md="3"/>
             <Col md="6">
               {form}
@@ -63,7 +74,8 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
-        authRedirectPath: state.auth.authRedirectPath
+        authRedirectPath: state.auth.authRedirectPath,
+        isNewSignup: state.auth.isNewSignup
     };
 };
 
