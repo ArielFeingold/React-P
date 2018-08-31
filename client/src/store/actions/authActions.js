@@ -50,7 +50,7 @@ export const signup = (email, password, username) => {
             dispatch(signupSuccess(json.user.id))
           })
           .catch( err => {
-            dispatch(signupFail(err))
+            dispatch(signupFail(err.errors))
           })
       };
   }

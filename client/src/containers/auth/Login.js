@@ -23,15 +23,37 @@ class Login extends Component {
 
       submitHandler = ( event ) => {
         event.preventDefault();
-        this.props.onLogin( this.state.email, this.state.password);
         event.target.className += ' was-validated';
+        this.props.onLogin( this.state.email, this.state.password);
       }
 
 
     render(){
 
-     let form =
-            <form className='needs-validation' onSubmit={this.submitHandler}>
+      let spinner = null;
+      if ( this.props.loading ) {spinner = <Spinner />}
+
+      let errorMessage = null;
+
+      if ( this.props.error ) {
+          errorMessage = (
+              <p>{this.props.error.message}</p>
+          );
+      }
+
+      let authRedirect = null;
+      if ( this.props.isAuthenticated ) {
+          authRedirect = <Redirect to="/home" />
+      }
+
+      return(
+        <Container className="mt-5 mx-auto">
+          {authRedirect}
+        <Row >
+          <Col md="3" />
+          <Col md="6">
+            {spinner}
+            <form className='needs-validation' onSubmit={this.submitHandler} noValidate>
               <p className="h4 text-center mb-4">Log In</p>
               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">Your email</label>
               <input type="email" name="email" value={this.state.email} id="defaultFormLoginEmailEx" onChange={this.handleChange} className="form-control"/>
@@ -42,31 +64,6 @@ class Login extends Component {
               <button className="btn btn-indigo" type="submit">Login</button>
               </div>
           </form>
-
-          if ( this.props.loading ) {
-              form = <Spinner />
-          }
-
-          let errorMessage = null;
-
-          if ( this.props.error ) {
-              errorMessage = (
-                  <p>{this.props.error.message}</p>
-              );
-          }
-
-          let authRedirect = null;
-          if ( this.props.isAuthenticated ) {
-              authRedirect = <Redirect to="/home" />
-          }
-
-      return(
-        <Container className="mt-5 mx-auto">
-          {authRedirect}
-        <Row >
-          <Col md="3" />
-          <Col md="6">
-            {form}
           </Col>
         </Row>
       </Container>
