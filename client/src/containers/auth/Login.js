@@ -34,10 +34,11 @@ class Login extends Component {
       if ( this.props.loading ) {spinner = <Spinner />}
 
       let errorMessage = null;
-
-      if ( this.props.error ) {
+      if ( this.props.errors ) {
           errorMessage = (
-              <p>{this.props.error.message}</p>
+            <div>
+              <Button className="w-100 p-3" color="danger">User Not Found</Button>
+            </div>
           );
       }
 
@@ -55,11 +56,12 @@ class Login extends Component {
             {spinner}
             <form className='needs-validation' onSubmit={this.submitHandler} noValidate>
               <p className="h4 text-center mb-4">Log In</p>
+              {errorMessage}
               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">Your email</label>
-              <input type="email" name="email" value={this.state.email} id="defaultFormLoginEmailEx" onChange={this.handleChange} className="form-control"/>
+              <input type="email" name="email" value={this.state.email} id="defaultFormLoginEmailEx" onChange={this.handleChange} className="form-control" autocomplete="off" required/>
               <br/>
               <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">Your password</label>
-              <input type="password" id="defaultFormLoginPasswordEx" className="form-control" value={this.state.password} name="password" onChange={this.handleChange}/>
+              <input type="password" id="defaultFormLoginPasswordEx" className="form-control" value={this.state.password} name="password" onChange={this.handleChange} autocomplete="off" required/>
               <div className="text-center mt-4">
               <button className="btn btn-indigo" type="submit">Login</button>
               </div>
@@ -74,7 +76,7 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error,
+        errors: state.auth.error,
         isAuthenticated: state.auth.token !== null,
         authRedirectPath: state.auth.authRedirectPath,
         authRedirectPath: state.auth.authRedirectPath

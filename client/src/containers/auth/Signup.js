@@ -28,34 +28,24 @@ class Signup extends Component {
 
     render(){
 
-        let spinner = null;
-        if ( this.props.loading ) {spinner = <Spinner />}
+      let spinner = null;
+      if ( this.props.loading ) {spinner = <Spinner />}
 
-        let errorMessagesEmail = null;
+      let errorMessagesEmail = null;
 
-        if ( this.props.errors ) {
-          let msg = this.props.errors.email
-          if ( msg )
-          errorMessagesEmail =
-                <div>
-                  <Button color="danger">The email address you chose is already in use. Please select a different email adress.</Button>
-                </div>
-            }
-        //
-        //     let errorMessagesPassword = null;
-        //
-        //     if ( this.props.errors.password ) {
-        //       errorMessagesEmail =
-        //             <div>
-        //               <Button color="danger"> {this.props.errors.password}</Button>
-        //             </div>
-        //         }
+      if ( this.props.errors ) {
+        let msg = this.props.errors.email[0]
+        if ( msg !==null && msg === "has already been taken" )
+        errorMessagesEmail =
+              <div>
+                <Button className="w-100 p-3 mb-3" color="danger">The email address you chose is already in use. Please select a different email adress.</Button>
+              </div>
+          }
 
-
-        let authRedirect = null;
-        if ( this.props.isNewSignup ) {
-            authRedirect = <Redirect to="/login" />
-        }
+      let authRedirect = null;
+      if ( this.props.isNewSignup ) {
+          authRedirect = <Redirect to="/login" />
+      }
 
 
       return(
@@ -66,7 +56,7 @@ class Signup extends Component {
             <Col md="6">
               {spinner}
               {errorMessagesEmail}
-              <form className='needs-validation' onSubmit={this.submitHandler} noValidate>
+              <form autocomplete="off" className='needs-validation' onSubmit={this.submitHandler} noValidate>
                 <p className="h4 text-center mb-4">Sign up</p>
                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">Choose Username</label>
                 <input onChange={this.handleChange} type="text" name="username" value={this.state.username} className="form-control" required/>
