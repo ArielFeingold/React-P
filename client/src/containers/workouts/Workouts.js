@@ -10,34 +10,12 @@ class Workouts extends Component {
 
   componentDidMount() {
     getWorkouts()
-    // const url = 'http://localhost:3001/workouts'
-    // fetch(url, {
-    //    method: 'GET',
-    //    headers: {
-    //      'Authorization': `Bearer + ${props.token}`,
-    //      'Content-Type': 'application/json; charset=utf-8"d'
-    //    },
-    //  })
-    //  .then( response => {
-    //    console.log(response)
-    //    return response.json()
-    //  })
-    //  .then( json => {
-    //    console.log(json)
-    //    if(json.status === 401) {throw json}
-    //    this.setState({
-    //      workouts: json
-    //    })
-    //  })
-    //  .catch( err => {
-    //      console.log(err)
-    //  })
   }
 
 
   render(){
     return(
-      "workers"
+      "workouts"
     )
   }
 
