@@ -44,7 +44,7 @@ class Login extends Component {
 
       let authRedirect = null;
       if ( this.props.isAuthenticated ) {
-          authRedirect = <Redirect to="/home" />
+          authRedirect = <Redirect to="/workouts" />
       }
 
       return(
@@ -54,7 +54,7 @@ class Login extends Component {
           <Col md="3" />
           <Col md="6">
             {spinner}
-            <form className='needs-validation' onSubmit={this.submitHandler} noValidate>
+            <form className='needs-validation example z-depth-5 p-3' onSubmit={this.submitHandler} noValidate>
               <p className="h4 text-center mb-4">Log In</p>
               {errorMessage}
               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">Your email</label>
@@ -85,7 +85,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onLogin: ( email, password ) => dispatch( actions.login( email, password) ),
-        onSetAuthRedirectPath: () => dispatch( actions.setAuthRedirectPath( '/' ) )
     };
 };
 

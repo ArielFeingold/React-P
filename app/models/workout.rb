@@ -1,5 +1,5 @@
 class Workout < ApplicationRecord
   belongs_to :user
 
-  validates :title, uniqueness: true
+  validates :title, :description, presence: true
 end
