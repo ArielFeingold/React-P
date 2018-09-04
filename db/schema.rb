@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 0) do
+=======
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2018_09_04_132948) do
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "last_login"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+=======
+ActiveRecord::Schema.define(version: 0) do
+>>>>>>> db8bfe6bf3a773d05b37b861ad6a4342d17c0617
+>>>>>>> fc44e0e683cff1e369f5fd13ea961736a4cd2485
 
   create_table "workouts", force: :cascade do |t|
     t.string "title"
