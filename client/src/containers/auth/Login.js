@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
 import '../../App.css';
-import { Container, Row, Col, Input, Button, Fa, Card, CardBody } from 'mdbreact';
+import { Container, Row, Col, Button } from 'mdbreact';
 import Spinner from '../../components/UI/Spinner'
 
 class Login extends Component {
@@ -58,10 +58,10 @@ class Login extends Component {
               <p className="h4 text-center mb-4">Log In</p>
               {errorMessage}
               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">Your email</label>
-              <input type="email" name="email" value={this.state.email} id="defaultFormLoginEmailEx" onChange={this.handleChange} className="form-control" autocomplete="off" required/>
+              <input type="email" name="email" value={this.state.email} id="defaultFormLoginEmailEx" onChange={this.handleChange} className="form-control" required/>
               <br/>
               <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">Your password</label>
-              <input type="password" id="defaultFormLoginPasswordEx" className="form-control" value={this.state.password} name="password" onChange={this.handleChange} autocomplete="off" required/>
+              <input type="password" id="defaultFormLoginPasswordEx" className="form-control" value={this.state.password} name="password" onChange={this.handleChange} required/>
               <div className="text-center mt-4">
               <button className="btn btn-indigo" type="submit">Login</button>
               </div>
@@ -79,7 +79,6 @@ const mapStateToProps = state => {
         errors: state.auth.error,
         isAuthenticated: state.auth.token !== null,
         authRedirectPath: state.auth.authRedirectPath,
-        authRedirectPath: state.auth.authRedirectPath
     };
 };
 

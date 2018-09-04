@@ -21,7 +21,7 @@ class Header extends Component {
     render() {
         return (
             <Navbar color="indigo" dark expand="md" scrolling>
-                <NavbarBrand style={{color: "white"}}>
+                <NavbarBrand style={{color: "white", cursor: "default"}} disabled>
                     <strong>GymJam</strong>
                 </NavbarBrand>
                 { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
