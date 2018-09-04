@@ -3,5 +3,9 @@ export {
   login,
   logout,
   authCheckState,
-  setAuthRedirectPath
+  setAuthRedirectPath,
 } from './authActions'
+
+export {
+  getWorkouts
+} from './workoutsActions'
