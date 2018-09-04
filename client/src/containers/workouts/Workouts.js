@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListGroup } from 'mdbreact'
 import WorkoutListItem from '../../components/Workout/WorkoutListItem'
+import AddWorkoutButton from '../../components/Workout/AddWorkoutButton'
 import { Container, Row, Col, Button } from 'mdbreact';
 import Spinner from '../../components/UI/Spinner';
 import { Redirect } from 'react-router-dom';
@@ -30,16 +31,17 @@ class Workouts extends Component {
      .then( json => {
        console.log(json)
        if(json.status !== 200) {throw json}
-       const userWorkouts = json.workouts
-       this.setState({
-         workouts: userWorkouts
-       })
+       if(json.workouts.length > 0){
+         const userWorkouts = json.workouts
+         this.setState({
+           workouts: userWorkouts
+         })}
      })
      .catch( err => {
          console.log(err)
      })
+    }
 
-  }
 
   render(){
 
@@ -47,13 +49,19 @@ class Workouts extends Component {
     if ( this.props.loading ) {spinner = <Spinner />}
 
     let authRedirect = null;
-      if ( this.props.isAuthenticated ) { authRedirect = <Redirect to="/workouts" /> }
+      if ( !this.props.isAuthenticated ) { authRedirect = <Redirect to="/Login" /> }
 
     let wo = this.state.workouts
 
     return(
       <Container className="mt-5 mx-auto">
         {authRedirect}
+      <Row>
+        <Col md="4"/>
+          <Col >
+            <AddWorkoutButton />
+        </Col>
+      </Row>
       <Row >
         <Col md="12">
           <ListGroup>
@@ -79,7 +87,7 @@ const mapStateToProps = state => {
   return {
     userId: state.auth.userId,
     token: state.auth.token,
-
+    isAuthenticated: state.auth.token !== null,
   }
 }
 
