@@ -1,57 +1,85 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ListGroup } from 'mdbreact'
+import WorkoutListItem from '../../components/Workout/WorkoutListItem'
+import { Container, Row, Col, Button } from 'mdbreact';
+import Spinner from '../../components/UI/Spinner';
+import { Redirect } from 'react-router-dom';
 
 class Workouts extends Component {
 
   state = {
-    workouts: null,
+    workouts: [{id:1, title: "No workouts to display", description: "Click to create your first workout!"}],
     error: null
   }
 
   componentDidMount() {
-    getWorkouts()
+    const token = localStorage.getItem('token')
+    const url = 'http://localhost:3001/workouts'
+    fetch(url, {
+       method: 'GET',
+       headers: {
+         'Authorization': `Bearer + ${token}`,
+         'Content-Type': 'application/json; charset=utf-8"d'
+       },
+     })
+     .then( response => {
+       console.log(response)
+       return response.json()
+     })
+     .then( json => {
+       console.log(json)
+       if(json.status !== 200) {throw json}
+       const userWorkouts = json.workouts
+       this.setState({
+         workouts: userWorkouts
+       })
+     })
+     .catch( err => {
+         console.log(err)
+     })
+
   }
 
-
   render(){
+
+    let spinner = null;
+    if ( this.props.loading ) {spinner = <Spinner />}
+
+    let authRedirect = null;
+      if ( this.props.isAuthenticated ) { authRedirect = <Redirect to="/workouts" /> }
+
+    let wo = this.state.workouts
+
     return(
-      "workouts"
+      <Container className="mt-5 mx-auto">
+        {authRedirect}
+      <Row >
+        <Col md="12">
+          <ListGroup>
+            {wo.map((workout) =>
+              <WorkoutListItem
+                key={workout.id}
+                title={workout.title}
+                description={workout.description}/>
+
+            )}
+          </ListGroup>
+        </Col>
+      </Row>
+    </Container>
+
     )
   }
 
-}
-
-function getWorkouts() {
-const token = localStorage.getItem('token')
-const url = 'http://localhost:3001/workouts'
-fetch(url, {
-   method: 'GET',
-   headers: {
-     'Authorization': `Bearer + ${token}`,
-     'Content-Type': 'application/json; charset=utf-8"d'
-   },
- })
- .then( response => {
-   console.log(response)
-   return response.json()
- })
- .then( json => {
-   console.log(json)
-   if(json.status !== 200) {throw json}
-   this.setState({
-     workouts: json
-   })
- })
- .catch( err => {
-     console.log(err)
- })
 }
 
 
 const mapStateToProps = state => {
   return {
     userId: state.auth.userId,
-    token: state.auth.token
+    token: state.auth.token,
+
   }
 }
 

@@ -4,14 +4,13 @@ import AuthTabs from './AuthTabs'
 import UnAuthTabs from './UnAuthTabs'
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+  state = {
             collapse: false,
             isWideEnough: false,
         };
-    this.onClick = this.onClick.bind(this);
-    }
+
+onClick = this.onClick.bind(this);
+
 
     onClick(){
         this.setState({
