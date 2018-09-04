@@ -5,6 +5,12 @@ import { Link } from 'react-router-dom'
 const AuthTabs = () => (
   <React.Fragment>
     <NavbarNav left>
+<<<<<<< HEAD
+=======
+      <NavItem >
+          <Link className="nav-link" to="#" >Home</Link>
+      </NavItem>
+>>>>>>> db8bfe6bf3a773d05b37b861ad6a4342d17c0617
       <NavItem>
           <Link className="nav-link" to="/workouts">Workouts</Link>
       </NavItem>
