@@ -56,7 +56,7 @@ class Signup extends Component {
             <Col md="6">
               {spinner}
               {errorMessagesEmail}
-              <form  className='needs-validation' onSubmit={this.submitHandler} noValidate>
+              <form  className='needs-validation example z-depth-5 p-3' onSubmit={this.submitHandler} noValidate>
                 <p className="h4 text-center mb-4">Sign up</p>
                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">Choose Username</label>
                 <input onChange={this.handleChange} type="text" name="username" value={this.state.username} className="form-control" required/>
