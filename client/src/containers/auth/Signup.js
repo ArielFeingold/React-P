@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
-import { Container, Row, Col, Input, Button } from 'mdbreact';
+import { Container, Row, Col, Button } from 'mdbreact';
 import Spinner from '../../components/UI/Spinner'
 
 class Signup extends Component {
@@ -56,7 +56,7 @@ class Signup extends Component {
             <Col md="6">
               {spinner}
               {errorMessagesEmail}
-              <form autocomplete="off" className='needs-validation' onSubmit={this.submitHandler} noValidate>
+              <form  className='needs-validation' onSubmit={this.submitHandler} noValidate>
                 <p className="h4 text-center mb-4">Sign up</p>
                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">Choose Username</label>
                 <input onChange={this.handleChange} type="text" name="username" value={this.state.username} className="form-control" required/>

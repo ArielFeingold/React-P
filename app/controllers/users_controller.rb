@@ -8,7 +8,6 @@ class UsersController < ApplicationController
     if user.save
       render json: {status: 200, user: user}
     else
-      # binding.remote_pry
       render json: {status: 400, errors: user.errors.messages}
     end
   end
