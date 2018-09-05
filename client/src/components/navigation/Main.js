@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from '../../containers/auth/Login'
 import Signup from '../../containers/auth/Signup'
-import Workouts from '../../containers/workouts/Workouts'
+import Workouts from '../../components/Workout/WorkoutsIndex'
 import NewWorkoutForm from '../../components/Workout/NewWorkoutForm'
 import Logout from '../../containers/auth/Logout'
 

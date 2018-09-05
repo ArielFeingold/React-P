@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
-import '../../App.css';
 import { Container, Row, Col, Button } from 'mdbreact';
 import Spinner from '../../components/UI/Spinner'
 
@@ -77,8 +76,7 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         errors: state.auth.error,
-        isAuthenticated: state.auth.token !== null,
-        authRedirectPath: state.auth.authRedirectPath,
+        isAuthenticated: state.auth.token !== null
     };
 };
 

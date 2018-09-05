@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListGroup } from 'mdbreact'
-import WorkoutListItem from '../../components/Workout/WorkoutListItem'
-import AddWorkoutButton from '../../components/Workout/AddWorkoutButton'
+import WorkoutListItem from './WorkoutListItem'
+import AddWorkoutButton from './AddWorkoutButton'
 import { Container, Row, Col, Button } from 'mdbreact';
-import Spinner from '../../components/UI/Spinner';
+import Spinner from '../UI/Spinner';
 import { Redirect } from 'react-router-dom';
 
-class Workouts extends Component {
+class WorkoutsIndex extends Component {
 
   state = {
     workouts: [{id:1, title: "No workouts to display", description: "Click to create your first workout!"}],
-    error: null
+    error: null,
+    loading: false
   }
 
   componentDidMount() {
@@ -24,17 +25,17 @@ class Workouts extends Component {
          'Content-Type': 'application/json; charset=utf-8"d'
        },
      })
+     .then(this.setState({loading: true }))
      .then( response => {
-       console.log(response)
        return response.json()
      })
      .then( json => {
-       console.log(json)
        if(json.status !== 200) {throw json}
        if(json.workouts.length > 0){
          const userWorkouts = json.workouts
          this.setState({
-           workouts: userWorkouts
+           workouts: userWorkouts,
+           loading:false
          })}
      })
      .catch( err => {
@@ -58,6 +59,7 @@ class Workouts extends Component {
         {authRedirect}
       <Row>
         <Col md="4"/>
+        {spinner}
           <Col >
             <AddWorkoutButton />
         </Col>
@@ -70,7 +72,6 @@ class Workouts extends Component {
                 key={workout.id}
                 title={workout.title}
                 description={workout.description}/>
-
             )}
           </ListGroup>
         </Col>
@@ -92,4 +93,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect( mapStateToProps)(Workouts);
+export default connect( mapStateToProps)(WorkoutsIndex);
