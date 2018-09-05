@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 0) do
-=======
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_09_04_132948) do
+ActiveRecord::Schema.define(version: 2018_09_05_161348) do
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "muscle"
+    t.string "equipment"
+    t.integer "session_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer "workout_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -24,10 +37,6 @@ ActiveRecord::Schema.define(version: 2018_09_04_132948) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-=======
-ActiveRecord::Schema.define(version: 0) do
->>>>>>> db8bfe6bf3a773d05b37b861ad6a4342d17c0617
->>>>>>> fc44e0e683cff1e369f5fd13ea961736a4cd2485
 
   create_table "workouts", force: :cascade do |t|
     t.string "title"
@@ -35,7 +44,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_workouts_on_user_id"
+  end
+
+  create_table "wsets", force: :cascade do |t|
+    t.integer "reps"
+    t.float "wheight"
+    t.integer "exercise_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

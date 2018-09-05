@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :exercise_sets
+  resources :exercises
+  resources :sessions
   resources :users
   resources :workouts
   post 'user_token' => 'user_token#create'
